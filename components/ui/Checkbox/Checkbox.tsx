@@ -1,47 +1,68 @@
 import classNames from 'classnames';
-import { HTMLProps, ReactNode, forwardRef } from 'react';
+import { PropsWithChildren, ReactNode, forwardRef } from 'react';
+import { useToggleState } from 'react-stately';
+import { useCheckbox, AriaCheckboxProps, VisuallyHidden } from 'react-aria';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquare, faSquareCheck } from '@fortawesome/free-regular-svg-icons';
 
-import { useFormItemContext } from '@/components/ui/FormItem';
+import FormItem from '@/components/ui/FormItem';
+import { useObjectRef } from '@react-aria/utils';
 
-export interface CheckboxProps
-  extends Omit<HTMLProps<HTMLInputElement>, 'label'> {
-  label?: ReactNode;
+export interface CheckboxProps extends AriaCheckboxProps {
+  className?: string;
+  errorMessage?: ReactNode;
 }
 
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ className, id, label, ...props }, ref) => {
-    const { error } = useFormItemContext();
+export const Checkbox = forwardRef<
+  HTMLInputElement,
+  PropsWithChildren<CheckboxProps>
+>(({ className, errorMessage, ...props }, ref) => {
+  const inputRef = useObjectRef(ref);
+  const { children } = props;
 
-    return (
-      <label
-        className={classNames(
-          className,
-          'inline-flex text-sm leading-normal text-stone-500'
+  const state = useToggleState(props);
+
+  const { inputProps } = useCheckbox(props, state, inputRef);
+
+  // const { isFocusVisible, focusProps } = useFocusRing();
+  const isSelected = state.isSelected && !props.isIndeterminate;
+
+  return (
+    <FormItem className={className}>
+      <label className="inline-flex text-sm leading-normal text-stone-500">
+        <VisuallyHidden>
+          <input
+            type="checkbox"
+            ref={ref}
+            className="peer sr-only"
+            {...inputProps}
+          />
+        </VisuallyHidden>
+
+        {isSelected ? (
+          <span
+            className={classNames(
+              'inline-block text-orange-400',
+              errorMessage && 'text-red-500'
+            )}
+          >
+            <FontAwesomeIcon icon={faSquareCheck} />
+          </span>
+        ) : (
+          <span
+            className={classNames(
+              'inline-block',
+              errorMessage && 'text-red-500'
+            )}
+          >
+            <FontAwesomeIcon icon={faSquare} />
+          </span>
         )}
-        htmlFor={id}
-      >
-        <input type="checkbox" ref={ref} className="peer sr-only" {...props} />
-        <span
-          className={classNames(
-            'inline-block peer-checked:hidden',
-            error && 'text-red-500'
-          )}
-        >
-          <FontAwesomeIcon icon={faSquare} />
-        </span>
-        <span
-          className={classNames(
-            'hidden peer-checked:inline-block text-orange-400',
-            error && 'text-red-500'
-          )}
-        >
-          <FontAwesomeIcon icon={faSquareCheck} />
-        </span>
-        <span className="ml-2">{label}</span>
+        <span className="ml-2">{children}</span>
       </label>
-    );
-  }
-);
+
+      {errorMessage && <FormItem.Error>{errorMessage}</FormItem.Error>}
+    </FormItem>
+  );
+});
 Checkbox.displayName = 'Checkbox';

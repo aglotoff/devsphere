@@ -11,7 +11,7 @@ export const LoggedOut: FC<PropsWithChildren> = ({ children }) => {
   const { user, ready } = useAuthState();
 
   useEffect(() => {
-    if (ready && user != null) redirect('/');
+    if (ready && user != null) redirect('/settings');
   }, [user, ready]);
 
   if (!ready) {

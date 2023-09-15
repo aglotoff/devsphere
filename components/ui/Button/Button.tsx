@@ -24,7 +24,7 @@ export const Button: FC<PropsWithChildren<ButtonProps>> = ({
   <button
     className={classNames(
       className,
-      'bg-orange-400 hover:bg-orange-500 inline-flex justify-center items-center space-x-2 rounded text-white text-sm leading-normal w-full p-3 focus:outline-none focus:shadow-outline disabled:bg-orange-300 disabled:cursor-not-allowed'
+      'bg-orange-400 hover:bg-orange-500 inline-flex justify-center items-center space-x-2 rounded text-white text-sm leading-normal px-7 py-3 focus:outline-none focus:shadow-outline disabled:bg-orange-300 disabled:cursor-not-allowed'
     )}
     disabled={disabled ?? loading}
     type={type}
