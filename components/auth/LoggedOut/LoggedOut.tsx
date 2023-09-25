@@ -1,22 +1,13 @@
 'use client';
 
 import { redirect } from 'next/navigation';
-import { FC, PropsWithChildren, useEffect } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
-import LoadingScreen from '@/components/auth/LoadingScreen';
-
-import { useAuthState } from '@/lib/auth';
+import { useAuth } from '@/lib/auth';
 
 export const LoggedOut: FC<PropsWithChildren> = ({ children }) => {
-  const { user, ready } = useAuthState();
-
-  useEffect(() => {
-    if (ready && user != null) redirect('/settings');
-  }, [user, ready]);
-
-  if (!ready) {
-    return <LoadingScreen />;
-  }
+  const user = useAuth();
+  if (user != null) redirect(`/profile/${user.uid}/settings`);
 
   return children;
 };

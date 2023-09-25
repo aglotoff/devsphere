@@ -23,6 +23,7 @@ export const RegisterForm: FC = () => {
   const onSubmit = async (data: RegisterFormData) => {
     try {
       await signUp(data);
+      window.location.reload();
     } catch (error) {
       toast.error(String(error));
     }

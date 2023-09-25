@@ -7,5 +7,16 @@ export interface SignInOptions {
   password: string;
 }
 
-export const signIn = ({ email, password }: SignInOptions) =>
-  signInWithEmailAndPassword(auth, email, password);
+export const signIn = async ({ email, password }: SignInOptions) => {
+  const { user } = await signInWithEmailAndPassword(auth, email, password);
+
+  await fetch('/api/auth/signin', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      token: await user.getIdToken(),
+    }),
+  });
+
+  return { user };
+};

@@ -1,23 +1,13 @@
 import { useEffect, useState } from 'react';
 import { auth } from '../firebase';
 
-export interface AuthUser {
-  uid: string;
-  email: string | null;
-  displayName: string | null;
-}
+import { AuthUser } from './AuthContext';
 
-export interface AuthState {
-  user: AuthUser | null;
-  ready: boolean;
-}
-
-export const useAuthState = () => {
-  const [user, setUser] = useState<AuthUser | null>(null);
-  const [ready, setReady] = useState(false);
+export const useAuthState = (defaultUser: AuthUser | null = null) => {
+  const [user, setUser] = useState(defaultUser);
 
   useEffect(() => {
-    const unsubscribe = auth.onIdTokenChanged(async (user) => {
+    const unsubscribe = auth.onIdTokenChanged((user) => {
       setUser(
         user && {
           uid: user.uid,
@@ -25,11 +15,10 @@ export const useAuthState = () => {
           displayName: user.displayName,
         }
       );
-      setReady(true);
     });
 
     return () => unsubscribe();
   }, []);
 
-  return { user, ready };
+  return user;
 };

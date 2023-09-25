@@ -9,10 +9,14 @@ const items = [
   { slug: '/profile', title: 'Profile' },
 ];
 
-export const SettingsMenu: FC = () => (
+export interface SettingsMenuProps {
+  basePathname?: string;
+}
+
+export const SettingsMenu: FC<SettingsMenuProps> = ({ basePathname = '' }) => (
   <Menu>
     {items.map(({ slug, title }) => (
-      <Menu.Item key={slug} href={`/settings${slug}`}>
+      <Menu.Item key={slug} href={`${basePathname}${slug}`}>
         {title}
       </Menu.Item>
     ))}

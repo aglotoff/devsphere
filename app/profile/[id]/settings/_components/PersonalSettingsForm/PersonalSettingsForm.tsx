@@ -3,6 +3,7 @@
 import { FC } from 'react';
 import toast from 'react-hot-toast';
 import { Controller } from 'react-hook-form';
+import { getData as getCountryList } from 'country-list';
 
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
@@ -10,29 +11,36 @@ import Input from '@/components/ui/Input';
 import Select from '@/components/ui/Select';
 import TextArea from '@/components/ui/TextArea';
 
-import { useAuthState } from '@/lib/auth';
+import { updatePersonalInfo, useProfile } from '@/lib/profile';
 
 import {
-  // PersonalSettingsFormData,
+  PersonalSettingsFormData,
   usePersonalSettingsForm,
 } from './hooks/usePersonalSettingsForm';
 
-import countries from './countries';
-
 export const PersonalSettingsForm: FC = () => {
-  const { user } = useAuthState();
+  const { profile, update } = useProfile();
 
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = usePersonalSettingsForm({
-    fullName: user?.displayName ?? undefined,
-    email: user?.email ?? undefined,
+    about: profile.about,
+    birthDate: profile.birthDate,
+    city: profile.city,
+    country: profile.country,
+    email: profile.email,
+    fullName: profile.fullName,
+    gender: profile.gender,
+    phone: profile.phone,
+    status: profile.status,
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: PersonalSettingsFormData) => {
     try {
+      await updatePersonalInfo(data);
+      update(data);
     } catch (error) {
       toast.error(String(error));
     }
@@ -83,7 +91,18 @@ export const PersonalSettingsForm: FC = () => {
               )}
             />
 
-            <Input className="col-span-3" label="Phone Number*" />
+            <Controller
+              control={control}
+              name="phone"
+              render={({ field }) => (
+                <Input
+                  label="Phone Number"
+                  errorMessage={errors.phone?.message}
+                  className="col-span-3"
+                  {...field}
+                />
+              )}
+            />
 
             <Controller
               control={control}
@@ -113,6 +132,7 @@ export const PersonalSettingsForm: FC = () => {
                   label="Status"
                   selectedKey={value}
                   onSelectionChange={onChange}
+                  errorMessage={errors.status?.message}
                   onBlur={onBlur}
                   {...props}
                 >
@@ -130,23 +150,33 @@ export const PersonalSettingsForm: FC = () => {
               name="country"
               render={({ field: { onChange, onBlur, value, ...props } }) => (
                 <Select
-                  className="col-span-2"
+                  className="col-span-3"
                   label="Country*"
                   selectedKey={value}
                   onSelectionChange={onChange}
                   onBlur={onBlur}
+                  errorMessage={errors.country?.message}
                   {...props}
                 >
-                  {countries.map(({ name, code }) => (
+                  {getCountryList().map(({ name, code }) => (
                     <Select.Item key={code}>{name}</Select.Item>
                   ))}
                 </Select>
               )}
             />
 
-            <Input className="col-span-2" label="State" />
-
-            <Input className="col-span-2" label="City*" />
+            <Controller
+              control={control}
+              name="city"
+              render={({ field }) => (
+                <Input
+                  label="City*"
+                  errorMessage={errors.city?.message}
+                  className="col-span-3"
+                  {...field}
+                />
+              )}
+            />
           </div>
         </Card.Content>
       </Card>

@@ -21,6 +21,7 @@ export const LoginForm: FC = () => {
   const onSubmit = async (data: LoginFormData) => {
     try {
       await signIn(data);
+      window.location.reload();
     } catch (error) {
       toast.error(String(error));
     }
