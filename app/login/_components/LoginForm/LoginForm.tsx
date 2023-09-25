@@ -1,15 +1,15 @@
 'use client';
 
 import { FC } from 'react';
+import { Controller } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import Button from '@/app/_components/ui/Button';
+import Input from '@/app/_components/ui/Input';
 
-import { signIn } from '@/lib/auth';
+import { signIn } from '../../_lib/signIn';
 
 import { useLoginForm, LoginFormData } from './hooks/useLoginForm';
-import { Controller } from 'react-hook-form';
 
 export const LoginForm: FC = () => {
   const {

@@ -2,7 +2,7 @@
 
 import { FC, PropsWithChildren, useState } from 'react';
 
-import { ProfileContext, Profile } from '@/lib/profile';
+import { ProfileContext, Profile } from '@/app/_lib/profile';
 
 export interface ProfileProviderProps {
   defaultProfile: Profile;

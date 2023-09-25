@@ -1,17 +1,17 @@
 'use client';
 
 import { FC } from 'react';
+import { Controller } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-import Button from '@/components/ui/Button';
-import Checkbox from '@/components/ui/Checkbox';
-import Input from '@/components/ui/Input';
-import Link from '@/components/ui/Link';
+import Button from '@/app/_components/ui/Button';
+import Checkbox from '@/app/_components/ui/Checkbox';
+import Input from '@/app/_components/ui/Input';
+import Link from '@/app/_components/ui/Link';
 
-import { signUp } from '@/lib/auth';
+import { signUp } from '../../_lib/signUp';
 
 import { RegisterFormData, useRegisterForm } from './hooks/useRegisterForm';
-import { Controller } from 'react-hook-form';
 
 export const RegisterForm: FC = () => {
   const {

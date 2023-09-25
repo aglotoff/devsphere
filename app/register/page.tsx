@@ -1,8 +1,8 @@
 import { Metadata, NextPage } from 'next';
 
-import SigningLayout from '@/components/layout/SigningLayout';
-import LoggedOut from '@/components/auth/LoggedOut';
-import Link from '@/components/ui/Link';
+import SigningLayout from '@/app/_components/layout/SigningLayout';
+import LoggedOut from '@/app/_components/auth/LoggedOut';
+import Link from '@/app/_components/ui/Link';
 
 import RegisterForm from './_components/RegisterForm';
 

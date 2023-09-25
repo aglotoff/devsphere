@@ -1,11 +1,9 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
-export async function POST() {
-  cookies().delete({
-    name: 'token',
-    httpOnly: true,
-  });
+import { destroySessionCookie } from './_lib/destroySessionCookie';
 
-  return NextResponse.json({});
+export function POST() {
+  destroySessionCookie(cookies());
+  return NextResponse.json({ message: 'OK' });
 }

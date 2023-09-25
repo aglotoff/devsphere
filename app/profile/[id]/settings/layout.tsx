@@ -1,15 +1,15 @@
 import { PropsWithChildren } from 'react';
 import { notFound } from 'next/navigation';
 
-import LoggedIn from '@/components/auth/LoggedIn';
-import Container from '@/components/layout/Container';
-import Card from '@/components/ui/Card';
-
-import { getProfile } from '@/lib/profile/getProfile';
+import Card from '@/app/_components/ui/Card';
+import Container from '@/app/_components/layout/Container';
+import LoggedIn from '@/app/_components/auth/LoggedIn';
 
 import ProfileHeader from './_components/ProfileHeader';
 import SettingsMenu from './_components/SettingsMenu';
 import ProfileProvider from './_components/ProfileProvider';
+
+import { getProfile } from './_lib/getProfile';
 
 export interface ProfileLayoutProps {
   params: { id: string };

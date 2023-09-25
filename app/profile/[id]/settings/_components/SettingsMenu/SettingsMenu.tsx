@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 
-import Menu from '@/components/ui/Menu';
+import Menu from '@/app/_components/ui/Menu';
 
 const items = [
   { slug: '', title: 'Personal Info' },

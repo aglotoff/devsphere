@@ -1,17 +1,19 @@
 'use client';
 
+import { getData as getCountryList } from 'country-list';
 import { FC } from 'react';
 import toast from 'react-hot-toast';
 import { Controller } from 'react-hook-form';
-import { getData as getCountryList } from 'country-list';
 
-import Button from '@/components/ui/Button';
-import Card from '@/components/ui/Card';
-import Input from '@/components/ui/Input';
-import Select from '@/components/ui/Select';
-import TextArea from '@/components/ui/TextArea';
+import Button from '@/app/_components/ui/Button';
+import Card from '@/app/_components/ui/Card';
+import Input from '@/app/_components/ui/Input';
+import Select from '@/app/_components/ui/Select';
+import TextArea from '@/app/_components/ui/TextArea';
 
-import { updatePersonalInfo, useProfile } from '@/lib/profile';
+import { useProfile } from '@/app/_lib/profile';
+
+import { updatePersonalSettings } from '../../_lib/updatePersonalSettings';
 
 import {
   PersonalSettingsFormData,
@@ -39,7 +41,7 @@ export const PersonalSettingsForm: FC = () => {
 
   const onSubmit = async (data: PersonalSettingsFormData) => {
     try {
-      await updatePersonalInfo(data);
+      await updatePersonalSettings(data);
       update(data);
     } catch (error) {
       toast.error(String(error));

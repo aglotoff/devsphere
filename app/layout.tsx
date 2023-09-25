@@ -6,13 +6,12 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { PropsWithChildren } from 'react';
 
-import AuthProvider from '@/components/auth/AuthProvider';
-import Notifications from '@/components/layout/Notifications';
+import AuthProvider from '@/app/_components/auth/AuthProvider';
+import Notifications from '@/app/_components/layout/Notifications';
 
-import { auth } from '@/lib/firebase/admin';
+import { verifySessionCookie } from '@/app/_lib/auth/sessionCookies';
 
 import './globals.css';
-import { AuthUser } from '@/lib/auth';
 
 config.autoAddCss = false;
 
@@ -27,22 +26,7 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = async ({ children }: PropsWithChildren) => {
-  const cookieStore = cookies();
-  const token = cookieStore.get('token');
-
-  let user: AuthUser | null = null;
-
-  if (token) {
-    try {
-      const res = await auth.verifySessionCookie(token.value);
-
-      user = {
-        uid: res.uid,
-        email: res.email!,
-        displayName: '',
-      };
-    } catch (err) {}
-  }
+  const user = await verifySessionCookie(cookies());
 
   return (
     <html lang="en">
