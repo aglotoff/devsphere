@@ -26,16 +26,18 @@ const ProfileLayout = async ({
   return (
     <LoggedIn>
       <ProfileProvider defaultProfile={profile}>
-        <ProfileHeader />
+        <section>
+          <ProfileHeader />
 
-        <Container className="flex items-start py-12">
-          <Card className="w-72 basis-auto grow-0 shrink-0">
-            <Card.Header>Your Details</Card.Header>
-            <SettingsMenu basePathname={`/profile/${id}/settings`} />
-          </Card>
+          <Container className="flex items-start py-12">
+            <Card className="w-72 basis-auto grow-0 shrink-0">
+              <Card.Header>Your Details</Card.Header>
+              <SettingsMenu basePathname={`/profile/${id}/settings`} />
+            </Card>
 
-          <div className="ml-6 grow shrink">{children}</div>
-        </Container>
+            <div className="ml-6 grow shrink">{children}</div>
+          </Container>
+        </section>
       </ProfileProvider>
     </LoggedIn>
   );

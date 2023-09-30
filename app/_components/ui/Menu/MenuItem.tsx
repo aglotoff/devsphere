@@ -1,10 +1,12 @@
-import { FC, PropsWithChildren } from 'react';
-import Link, { LinkProps } from 'next/link';
+import { FC, MouseEventHandler, PropsWithChildren } from 'react';
+import Link from 'next/link';
 import classNames from 'classnames';
 import { usePathname } from 'next/navigation';
 
-export interface MenuItemProps extends LinkProps {
+export interface MenuItemProps {
   className?: string;
+  href?: string;
+  onClick?: MouseEventHandler<HTMLElement>;
 }
 
 export const MenuItem: FC<PropsWithChildren<MenuItemProps>> = ({
@@ -14,19 +16,21 @@ export const MenuItem: FC<PropsWithChildren<MenuItemProps>> = ({
 }) => {
   const pathname = usePathname();
 
+  const linkClass = classNames(
+    className,
+    'block text-sm hover:bg-white w-full text-left',
+    pathname === href
+      ? 'text-orange-400 border-orange-400'
+      : 'text-stone-500 border-transparent hover:text-orange-400'
+  );
+
   return (
     <li className="border-b border-neutral-200 last:border-b-0">
-      <Link
-        className={classNames(
-          className,
-          'block py-5 px-6 text-sm ',
-          pathname === href
-            ? 'text-orange-400 border-r-4 border-r-orange-400'
-            : 'text-stone-500 hover:text-orange-400'
-        )}
-        href={href}
-        {...props}
-      />
+      {href ? (
+        <Link className={linkClass} href={href} {...props} />
+      ) : (
+        <button className={linkClass} {...props} />
+      )}
     </li>
   );
 };

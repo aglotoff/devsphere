@@ -14,7 +14,7 @@ export interface SettingsMenuProps {
 }
 
 export const SettingsMenu: FC<SettingsMenuProps> = ({ basePathname = '' }) => (
-  <Menu>
+  <Menu activeBorder="right" size="large">
     {items.map(({ slug, title }) => (
       <Menu.Item key={slug} href={`${basePathname}${slug}`}>
         {title}

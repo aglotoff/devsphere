@@ -4,22 +4,11 @@ import { FC } from 'react';
 import { getName as getCountryName } from 'country-list';
 
 import Container from '@/app/_components/layout/Container';
-import Button from '@/app/_components/ui/Button';
 
-import { useAuth } from '@/app/_lib/auth';
 import { useProfile } from '@/app/_lib/profile';
 
-import { signOut } from '../../_lib/signOut';
-
 export const ProfileHeader: FC = () => {
-  const user = useAuth();
   const { profile } = useProfile();
-
-  const handleSignOut = async () => {
-    await signOut();
-
-    window.location.reload();
-  };
 
   const dateFormatter = new Intl.DateTimeFormat('en-US', {
     month: 'long',
@@ -46,12 +35,6 @@ export const ProfileHeader: FC = () => {
             <div className="mt-1.5">{getCountryName(profile.country)}</div>
           )}
         </div>
-
-        {user && (
-          <Button onClick={handleSignOut} className="ml-auto">
-            Log Out
-          </Button>
-        )}
       </Container>
     </header>
   );

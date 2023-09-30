@@ -16,7 +16,7 @@ export const verifySessionCookie = async (cookies: ReadonlyRequestCookies) => {
     return {
       uid: res.uid,
       email: res.email!,
-      displayName: 'Unknown',
+      displayName: res.name,
     } as AuthUser;
   } catch (err) {
     return null;
