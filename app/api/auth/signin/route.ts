@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
-import { createSessionCookie } from './_lib/createSessionCookie';
+import { createSessionCookie } from '@/shared/lib/session-cookies';
 
 export async function POST(request: Request) {
   const body = await request.json();

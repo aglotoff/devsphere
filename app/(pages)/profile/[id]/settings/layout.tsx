@@ -1,15 +1,14 @@
 import { PropsWithChildren } from 'react';
 import { notFound } from 'next/navigation';
 
-import Card from '@/app/_components/ui/Card';
-import Container from '@/app/_components/layout/Container';
-import LoggedIn from '@/app/_components/auth/LoggedIn';
+import { ProfileHeader } from '@/widgets/profile-header';
+import { SettingsMenu } from '@/widgets/settings-menu';
+import { AuthGuardUser } from '@/entities/auth';
+import { ProfileProvider } from '@/entities/profile';
+import { Card } from '@/shared/ui/Card';
+import { Container } from '@/shared/ui/Container';
 
-import ProfileHeader from './_components/ProfileHeader';
-import SettingsMenu from './_components/SettingsMenu';
-import ProfileProvider from './_components/ProfileProvider';
-
-import { getProfile } from './_lib/getProfile';
+import { getProfile } from './_api';
 
 export interface ProfileLayoutProps {
   params: { id: string };
@@ -24,7 +23,7 @@ const ProfileLayout = async ({
   if (profile == null) notFound();
 
   return (
-    <LoggedIn>
+    <AuthGuardUser>
       <ProfileProvider defaultProfile={profile}>
         <section>
           <ProfileHeader />
@@ -39,7 +38,7 @@ const ProfileLayout = async ({
           </Container>
         </section>
       </ProfileProvider>
-    </LoggedIn>
+    </AuthGuardUser>
   );
 };
 

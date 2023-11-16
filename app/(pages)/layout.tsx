@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import Header from '@/app/_components/layout/Header';
+import { Header } from '@/widgets/header';
 
 export interface ProfileLayoutProps {
   params: { id: string };

@@ -1,0 +1,1 @@
+export { SettingsPersonalForm } from './SettingsPersonalForm';

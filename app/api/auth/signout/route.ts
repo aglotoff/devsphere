@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
-import { destroySessionCookie } from './_lib/destroySessionCookie';
+import { destroySessionCookie } from '@/shared/lib/session-cookies';
 
 export function POST() {
   destroySessionCookie(cookies());

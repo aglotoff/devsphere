@@ -1,18 +1,16 @@
 import { Metadata, NextPage } from 'next';
 
-import SigningLayout from '@/app/_components/layout/SigningLayout';
-import LoggedOut from '@/app/_components/auth/LoggedOut';
-import Link from '@/app/_components/ui/Link';
-
-import RegisterForm from './_components/RegisterForm';
+import { RegisterForm } from '@/features/auth/register-form';
+import { AuthLayout, AuthGuardGuest } from '@/entities/auth';
+import { Link } from '@/shared/ui/Link';
 
 export const metadata: Metadata = {
   title: 'Register | DevSphere',
 };
 
 const Register: NextPage = () => (
-  <LoggedOut>
-    <SigningLayout
+  <AuthGuardGuest>
+    <AuthLayout
       title="Register Now"
       description="This is a pet project and shouldn't be used for anything serious. Feel free to use a dummy email if you like."
     >
@@ -28,8 +26,8 @@ const Register: NextPage = () => (
           Login Now
         </Link>
       </div>
-    </SigningLayout>
-  </LoggedOut>
+    </AuthLayout>
+  </AuthGuardGuest>
 );
 
 export default Register;
