@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form';
+import isMobilePhone from 'validator/es/lib/isMobilePhone';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -18,9 +19,14 @@ const SettingsPersonalFormSchema = z.object({
   country: z
     .string({ required_error: 'This field is required' })
     .min(1, 'This field is required'),
-  status: z.optional(z.string()),
-  about: z.optional(z.string()),
-  phone: z.optional(z.string()),
+  status: z.string().optional(),
+  about: z.string().optional(),
+  phone: z
+    .string()
+    .trim()
+    .refine((value) => isMobilePhone(value))
+    .optional()
+    .or(z.literal('')),
   city: z
     .string({ required_error: 'This field is required' })
     .min(1, 'This field is required'),
