@@ -15,7 +15,7 @@ export const ProfileProvider: FC<PropsWithChildren<ProfileProviderProps>> = ({
 }) => {
   const [profile, setProfile] = useState(defaultProfile);
 
-  const update = (newValue: Profile) => {
+  const update = (newValue: Omit<Profile, 'uid'>) => {
     setProfile((oldValue) => ({
       ...oldValue,
       ...newValue,

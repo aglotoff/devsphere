@@ -6,11 +6,11 @@ import { Profile } from '../types';
 
 export interface ProfileContext {
   profile: Profile;
-  update: (profile: Profile) => void;
+  update: (profile: Omit<Profile, 'uid'>) => void;
 }
 
 export const ProfileContext = createContext<ProfileContext>({
-  profile: { fullName: '', email: '' },
+  profile: { fullName: '', email: '', uid: '' },
   update: () => {},
 });
 

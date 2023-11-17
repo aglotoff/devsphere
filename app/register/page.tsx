@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Register | DevSphere',
 };
 
-const Register: NextPage = () => (
+const RegisterPage: NextPage = () => (
   <AuthGuardGuest>
     <AuthLayout
       title="Register Now"
@@ -30,4 +30,4 @@ const Register: NextPage = () => (
   </AuthGuardGuest>
 );
 
-export default Register;
+export default RegisterPage;

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Login | DevSphere',
 };
 
-const Login: NextPage = () => (
+const LoginPage: NextPage = () => (
   <AuthGuardGuest>
     <AuthLayout
       title="Login Now"
@@ -26,4 +26,4 @@ const Login: NextPage = () => (
   </AuthGuardGuest>
 );
 
-export default Login;
+export default LoginPage;

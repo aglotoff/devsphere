@@ -4,7 +4,7 @@ import { collection, doc, updateDoc } from 'firebase/firestore';
 import { Profile } from '@/entities/profile';
 import { auth, firestore } from '@/shared/api/firebase';
 
-export const updatePersonalSettings = async (data: Profile) => {
+export const updatePersonalSettings = async (data: Omit<Profile, 'uid'>) => {
   const { currentUser } = auth;
   if (currentUser == null) throw new Error('unauthenticated');
 

@@ -3,16 +3,11 @@
 import { FC } from 'react';
 import { getName as getCountryName } from 'country-list';
 
-import { profileModel } from '@/entities/profile';
+import { profileLib, profileModel } from '@/entities/profile';
 import { Container } from '@/shared/ui/Container';
 
 export const ProfileHeader: FC = () => {
   const { profile } = profileModel.useCurrentProfile();
-
-  const dateFormatter = new Intl.DateTimeFormat('en-US', {
-    month: 'long',
-    year: 'numeric',
-  });
 
   return (
     <header>
@@ -27,7 +22,7 @@ export const ProfileHeader: FC = () => {
           </div>
           {profile.createTime && (
             <div className="mt-2.5">
-              Member since {dateFormatter.format(new Date(profile.createTime))}
+              Member since {profileLib.formatCreationDate(profile.createTime)}
             </div>
           )}
           {profile.country && (

@@ -7,7 +7,7 @@ import { useAuth } from '../../model';
 
 export const AuthGuardGuest: FC<PropsWithChildren> = ({ children }) => {
   const user = useAuth();
-  if (user != null) redirect(`/profile/${user.uid}/settings`);
+  if (user != null) redirect(`/profile/${user.uid}`);
 
   return children;
 };

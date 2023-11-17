@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Profile Settings | DevSphere',
 };
 
-const SettingsProfile: NextPage = () => (
+const SettingsProfilePage: NextPage = () => (
   <form>
     <Card>
       <Card.Header>Profile</Card.Header>
@@ -15,4 +15,4 @@ const SettingsProfile: NextPage = () => (
   </form>
 );
 
-export default SettingsProfile;
+export default SettingsProfilePage;
