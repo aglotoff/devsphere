@@ -14,12 +14,12 @@ export interface PopoverProps
   extends Omit<AriaPopoverProps, 'popoverRef' | 'triggerRef'> {
   content: ReactElement;
   children?: (
-    props: AriaButtonProps<'button'> & { ref: Ref<HTMLElement> }
+    props: AriaButtonProps<'button'> & { ref: Ref<HTMLButtonElement> }
   ) => ReactNode;
 }
 
 export const Popover: FC<PopoverProps> = ({ children, content, ...props }) => {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLButtonElement>(null);
 
   const state = useOverlayTriggerState({});
 

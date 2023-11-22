@@ -5,7 +5,7 @@ import { FC, PropsWithChildren } from 'react';
 
 import { useAuth } from '../../model';
 
-export const AuthGuardGuest: FC<PropsWithChildren> = ({ children }) => {
+export const ViewerGuardGuest: FC<PropsWithChildren> = ({ children }) => {
   const user = useAuth();
   if (user != null) redirect(`/profile/${user.uid}`);
 

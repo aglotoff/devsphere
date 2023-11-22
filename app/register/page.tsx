@@ -2,7 +2,7 @@ import { Metadata, NextPage } from 'next';
 
 import { AuthLayout } from '@/widgets/auth-layout';
 import { RegisterForm } from '@/features/auth/register-form';
-import { AuthGuardGuest } from '@/entities/auth';
+import { ViewerGuardGuest } from '@/entities/viewer';
 import { Link } from '@/shared/ui/Link';
 
 export const metadata: Metadata = {
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const RegisterPage: NextPage = () => (
-  <AuthGuardGuest>
+  <ViewerGuardGuest>
     <AuthLayout
       title="Register Now"
       description="This is a pet project and shouldn't be used for anything serious. Feel free to use a dummy email if you like."
@@ -28,7 +28,7 @@ const RegisterPage: NextPage = () => (
         </Link>
       </div>
     </AuthLayout>
-  </AuthGuardGuest>
+  </ViewerGuardGuest>
 );
 
 export default RegisterPage;

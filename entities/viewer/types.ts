@@ -1,4 +1,4 @@
-export interface AuthUser {
+export interface Viewer {
   uid: string;
   email: string | null;
   displayName: string | null;

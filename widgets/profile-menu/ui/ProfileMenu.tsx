@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 
-import { authModel } from '@/entities/auth';
+import { viewerModel } from '@/entities/viewer';
 import { TabNav } from '@/shared/ui/TabNav';
 import { profileModel } from '@/entities/profile';
 
@@ -16,7 +16,7 @@ export interface ProfileMenuProps {
 }
 
 export const ProfileMenu: FC<ProfileMenuProps> = ({ basePathname = '' }) => {
-  const auth = authModel.useAuth();
+  const auth = viewerModel.useAuth();
   const { profile } = profileModel.useCurrentProfile();
 
   const visibleItems = items.filter(

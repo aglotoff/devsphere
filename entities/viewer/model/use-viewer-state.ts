@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 
 import { auth } from '@/shared/api/firebase';
 
-import { AuthUser } from '../types';
+import { Viewer } from '../types';
 
-export const useAuthState = (defaultUser: AuthUser | null = null) => {
+export const useViewerState = (defaultUser: Viewer | null = null) => {
   const [user, setUser] = useState(defaultUser);
 
   useEffect(() => {

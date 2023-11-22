@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 
-import { authModel } from '@/entities/auth';
+import { viewerModel } from '@/entities/viewer';
 import { Button } from '@/shared/ui/Button';
 import { Menu } from '@/shared/ui/Menu';
 import { Popover } from '@/shared/ui/Popover';
@@ -11,7 +11,7 @@ import { UserMenuTrigger } from './UserMenuTrigger';
 import { signOut } from '../api';
 
 export const UserMenu: FC = () => {
-  const user = authModel.useAuth();
+  const user = viewerModel.useAuth();
 
   if (user == null) {
     return (

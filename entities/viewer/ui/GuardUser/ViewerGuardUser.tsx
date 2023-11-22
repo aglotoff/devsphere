@@ -5,11 +5,14 @@ import { FC, PropsWithChildren } from 'react';
 
 import { useAuth } from '../../model';
 
-export interface AuthGuardUserProps extends PropsWithChildren {
+export interface ViewerGuardUserProps extends PropsWithChildren {
   uid?: string;
 }
 
-export const AuthGuardUser: FC<AuthGuardUserProps> = ({ children, uid }) => {
+export const ViewerGuardUser: FC<ViewerGuardUserProps> = ({
+  children,
+  uid,
+}) => {
   const user = useAuth();
 
   if (user == null) redirect('/login');

@@ -6,7 +6,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { PropsWithChildren } from 'react';
 
-import { AuthProvider, AuthUser } from '@/entities/auth';
+import { ViewerProvider, Viewer } from '@/entities/viewer';
 import { verifySessionCookie } from '@/shared/lib/session-cookies';
 import { ToastContainer } from '@/shared/ui/ToastContainer';
 
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 const RootLayout = async ({ children }: PropsWithChildren) => {
   const decodedToken = await verifySessionCookie(cookies());
 
-  const user: AuthUser | null = decodedToken && {
+  const user: Viewer | null = decodedToken && {
     uid: decodedToken.uid,
     email: decodedToken.email!,
     displayName: '',
@@ -37,7 +37,7 @@ const RootLayout = async ({ children }: PropsWithChildren) => {
     <html lang="en">
       <body className={montserrat.className}>
         <NextTopLoader color="#fb923c" />
-        <AuthProvider defaultUser={user}>{children}</AuthProvider>
+        <ViewerProvider defaultUser={user}>{children}</ViewerProvider>
         <ToastContainer />
       </body>
     </html>

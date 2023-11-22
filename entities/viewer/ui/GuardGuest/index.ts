@@ -1,0 +1,1 @@
+export { ViewerGuardGuest } from './ViewerGuardGuest';

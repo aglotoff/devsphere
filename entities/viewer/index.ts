@@ -1,3 +1,3 @@
-export * as authModel from './model';
+export * as viewerModel from './model';
 export * from './ui';
 export * from './types';

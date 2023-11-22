@@ -1,10 +1,10 @@
 'use client';
 
 import { redirect } from 'next/navigation';
-import { authModel } from '@/entities/auth';
+import { viewerModel } from '@/entities/viewer';
 
 export default function HomePage() {
-  const user = authModel.useAuth();
+  const user = viewerModel.useAuth();
 
   if (user != null) redirect(`/profile/${user.uid}`);
   else redirect('/login');
