@@ -3,10 +3,12 @@
 import { getData as getCountryList } from 'country-list';
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
+import { parseDate } from '@internationalized/date';
 
 import { profileModel } from '@/entities/profile';
 import { Button } from '@/shared/ui/Button';
 import { Card } from '@/shared/ui/Card';
+import { DatePicker } from '@/shared/ui/DatePicker';
 import { Input } from '@/shared/ui/Input';
 import { Select } from '@/shared/ui/Select';
 import { TextArea } from '@/shared/ui/TextArea';
@@ -65,12 +67,14 @@ export const SettingsPersonalForm: FC = () => {
             <Controller
               control={control}
               name="birthDate"
-              render={({ field }) => (
-                <Input
+              render={({ field: { value, onChange, ...props } }) => (
+                <DatePicker
                   label="Date of Birth*"
-                  errorMessage={errors.birthDate?.message}
                   className="col-span-3"
-                  {...field}
+                  errorMessage={errors.birthDate?.message}
+                  value={value ? parseDate(value) : null}
+                  onChange={(v) => onChange(v?.toString() ?? '')}
+                  {...props}
                 />
               )}
             />
