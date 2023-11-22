@@ -1,7 +1,8 @@
 import { Metadata, NextPage } from 'next';
 
+import { AuthLayout } from '@/widgets/auth-layout';
 import { LoginForm } from '@/features/auth/login-form';
-import { AuthLayout, AuthGuardGuest } from '@/entities/auth';
+import { AuthGuardGuest } from '@/entities/auth';
 import { Link } from '@/shared/ui/Link';
 
 export const metadata: Metadata = {
