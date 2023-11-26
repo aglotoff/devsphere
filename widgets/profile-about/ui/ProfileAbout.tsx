@@ -1,20 +1,23 @@
+'use client';
+
 import { FC } from 'react';
 
-import { Profile } from '@/entities/profile';
+import { profileModel } from '@/entities/profile';
 import { Card } from '@/shared/ui/Card';
 
-export interface ProfileAboutProps {
-  profile: Profile;
-}
+export const ProfileAbout: FC = () => {
+  const { profile } = profileModel.useCurrentProfile();
 
-export const ProfileAbout: FC<ProfileAboutProps> = ({ profile }) =>
-  profile.about && (
-    <Card>
-      <Card.Header>About</Card.Header>
-      <Card.Content>
-        <div className="text-stone-500 text-sm leading-normal">
-          {profile.about}
-        </div>
-      </Card.Content>
-    </Card>
+  return (
+    profile.about && (
+      <Card>
+        <Card.Header>About</Card.Header>
+        <Card.Content>
+          <div className="text-stone-500 text-sm leading-normal">
+            {profile.about}
+          </div>
+        </Card.Content>
+      </Card>
+    )
   );
+};
